@@ -1,0 +1,10 @@
+header {
+  background-image: url('https://cdn.pixabay.com/photo/2021/05/25/12/10/beach-6282284_960_720.jpg');
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  background-attachment:fixed;
+  background-size: cover;
+  background-position: top left;
+  height: 60vh;
+  width: 100%;
+}

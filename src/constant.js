@@ -1,0 +1,5 @@
+const GET_IMAGES = 'GET_IMAGES';
+
+const LOADING = 'LOADING'
+
+export { GET_IMAGES,LOADING };
