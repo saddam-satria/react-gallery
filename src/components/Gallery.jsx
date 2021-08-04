@@ -17,7 +17,7 @@ const Gallery = () => {
         <Row>
           {images < 1 || images === undefined ? (
             <div className="spinner-container">
-              <Spinner color="primary" children=""></Spinner>
+              <h4 className="text-danger">Images not found</h4>
             </div>
           ) : loading ? (
             <div className="spinner-container">
