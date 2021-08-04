@@ -1,59 +1,50 @@
-import React from 'react';
-import { Card, CardImg, CardSubtitle, CardTitle, Col, Row, Container, Spinner } from 'reactstrap';
 import { useSelector } from 'react-redux';
-
-import * as Bi from 'react-icons/bi';
+import { Col, Container, Row, Spinner } from 'reactstrap';
+import * as Fc from 'react-icons/fc';
+import * as Fa from 'react-icons/fa';
+import * as Ai from 'react-icons/ai';
 
 const Gallery = () => {
   const images = useSelector((state) => state.images.images.hits);
   const loading = useSelector((state) => state.images.loading);
 
+  const downloadHandler = (e, url) => {
+   window.location.replace(url)
+  };
   return (
-    <div className="mt-2">
+    <div className="gallery-component">
       <Container>
         <Row>
-          {images === undefined ? (
-            <div className="d-flex justify-content-center mt-3">
+          {images < 1 || images === undefined ? (
+            <div className="spinner-container">
               <Spinner color="primary" children=""></Spinner>
             </div>
           ) : loading ? (
-            <div className="d-flex justify-content-center mt-3">
+            <div className="spinner-container">
               <Spinner color="primary" children=""></Spinner>
             </div>
           ) : (
             images.map((image) => {
               return (
                 <>
-                  <Col md={3} xs={12} className="mb-2">
-                    <Card>
-                      <CardImg src={image.webformatURL} alt="test" />
-
-                      <div className="icons">
-                        <div className="likes-icon">
+                  <Col md={4} className="mb-2">
+                    <div className="gallery" onClick={(e) => downloadHandler(e, image.largeImageURL)} style={{ backgroundImage: `url(${image.webformatURL})` }}>
+                      <div className="gallery-text">
+                        <span>
+                          <Fc.FcLike /> {image.likes}
+                        </span>
+                        <div className="ms-auto">
                           <span>
-                            <Bi.BiLike size="20" />
+                            <Fa.FaCommentAlt /> {image.comments}
                           </span>
-                          <span>{image.likes}</span>
                         </div>
-                        <span className="bookmark-icon">
-                          {image.comments}
-                          <Bi.BiComment size="20" />
+                      </div>
+                      <div className="gallery-user">
+                        <span>
+                          <Ai.AiFillCamera /> {image.user}
                         </span>
                       </div>
-
-                      <div className="card-title">
-                        <CardTitle>{image.user}</CardTitle>
-                      </div>
-                      <CardSubtitle>
-                        {[image.tags].map((tag) => {
-                          return (
-                            <>
-                              <span className="tags">{tag}</span>
-                            </>
-                          );
-                        })}
-                      </CardSubtitle>
-                    </Card>
+                    </div>
                   </Col>
                 </>
               );

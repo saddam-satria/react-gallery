@@ -2,6 +2,7 @@ import { Button, InputGroup, Input } from 'reactstrap';
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getImages } from '../action/images';
+import * as Bs from 'react-icons/bs'
 
 const SearchInput = () => {
   const [input, setInput] = useState('');
@@ -9,7 +10,7 @@ const SearchInput = () => {
 
   useEffect(() => {
     dispatch(getImages(input));
-  }, [dispatch,input]);
+  }, [dispatch, input]);
 
   const searchImagesHandler = (e) => {
     if (e.keyCode === 13) {
@@ -17,20 +18,19 @@ const SearchInput = () => {
       e.target.value = '';
     }
   };
-  
+
   const searchImagesHandlerClick = () => {
-    const input = document.querySelector('input').value
-    setInput(input)
-    
-  }
+    const input = document.querySelector('input').value;
+    setInput(input);
+  };
   return (
-    <div className="search-input">
-      <div className="search">
-        <InputGroup>
-          <Input placeholder="find images..." onKeyUp={searchImagesHandler} color="primary" />
-          <Button color="primary" onClick={searchImagesHandlerClick}>Search</Button>
-        </InputGroup>
-      </div>
+    <div className="search">
+      <InputGroup>
+        <Input placeholder="find images ..." onKeyUp={searchImagesHandler} color="primary" />
+        <Button onClick={searchImagesHandlerClick}>
+          <Bs.BsSearch />
+        </Button>
+      </InputGroup>
     </div>
   );
 };
